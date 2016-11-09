@@ -3,7 +3,7 @@
 
     let arr = [1,2,3,4,5];
 
-    let isNumber = (value) => {return typeof value === 'number'};
+    let isNumber = value => typeof value === 'number';
 
         let isAllTrue = (source, filterFn) => {
             if (!source.length) {
