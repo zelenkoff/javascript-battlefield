@@ -18,7 +18,6 @@
             }
         }
 
-        console.log(checker);
 
         if (checker === source.length) {
             return false;
