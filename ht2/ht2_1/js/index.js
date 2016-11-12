@@ -3,21 +3,26 @@
 
     let arr = [1,2,3,4,5];
 
-    let isNumber = value => typeof value === 'number';
+    let isNumber = value => typeof value === 'string';
 
         let isAllTrue = (source, filterFn) => {
+            let checker = 0;
+
             if (!source.length) {
                 throw new Error('Массив пуст! Пожалуйста, добавьте хотя бы один элемент');
             }
 
-            let trueChecker = source.filter(filterFn);
+            for (let i = 0; i < source.length; i++) {
+                if (filterFn(source[i])) {
+                    checker++;
+                }
+            }
 
-            if (trueChecker.length === source.length) {
+            if (checker === source.length) {
                 return true;
             } else {
                 return false;
             }
-
         };
 
     try {
