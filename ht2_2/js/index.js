@@ -1,30 +1,36 @@
 (() => {
     'use strict';
 
-    let data = [1,2,3,4,5],
-        newArr = [];
+    let data = [1,2,3,4,5];
 
-    let falseChecker = value => {
-      if (typeof value === 'string') {
-          return true;
-      } else {
-          newArr.push(value);
-      }
-    };
+    let falseChecker = value => typeof value === 'string';
 
     let isSomeTrue = (source, filterFn) => {
-        for (let i = 0; i < source.length; i++) {
-            filterFn(source[i]);
+        let checker = 0;
+
+        if (!source.length) {
+            throw new Error('Нельзя передать пустой массив');
         }
 
-        if (source.length === newArr.length) {
+        for (let i = 0; i < source.length; i++) {
+            if (!filterFn(source[i])) {
+                checker++;
+            }
+        }
+
+        console.log(checker);
+
+        if (checker === source.length) {
             return false;
         } else {
             return true;
         }
 
     };
-
-    console.log(isSomeTrue(data,falseChecker));
+    try {
+        console.log(isSomeTrue(data,falseChecker));
+    } catch (e) {
+        console.log(e.message);
+    }
 })();
 
