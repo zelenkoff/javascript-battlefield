@@ -8,9 +8,18 @@
              subProp1: 'sub value1',
              subProp2: {
                  subSubProp1: 'sub sub value1',
-                 subSubProp2: [1, 2, {prop2: 1, prop: 2}, 4, 5]
+                 subSubProp2: [1, 2, {prop2: 1, prop: 2}, 4, 5],
+                 subSubProp3: [1, 2, {prop2: 1, prop: 2}, 4, 5]
              }
          },
+        prop7: {
+            subProp1: 'sub value1',
+            subProp2: {
+                subSubProp1: 'sub sub value1',
+                subSubProp2: [1, 2, {prop2: 1, prop: 2}, 4, 5],
+                subSubProp3: [1, 2, {prop2: 1, prop: 2}, 4, 5]
+            }
+        },
          prop5: 1000,
          prop6: new Date(2016, 2, 10)
      };
@@ -23,12 +32,20 @@
          prop4: {
              subProp2: {
                  subSubProp1: 'sub sub value1',
-                 subSubProp2: [1, 2, {prop2: 1, prop: 2}, 4]
+                 subSubProp2: [1, 2, {prop2: 1, prop: 2}, 4, 5],
+                 subSubProp3: [1, 2, {prop2: 1, prop: 2}, 4, 5]
              },
              subProp1: 'sub value1'
+         },
+         prop7: {
+             subProp1: 'sub value1',
+             subProp2: {
+                 subSubProp1: 'sub sub value1',
+                 subSubProp2: [1, 2, {prop2: 1, prop: 2}, 4, 5],
+                 subSubProp3: [1, 2, {prop2: 1, prop: 2}, 4, 5]
+             }
          }
  };
-
 
     function deepEqual(obj1, obj2) {
 
@@ -39,53 +56,54 @@
         if (obj1 === obj2) return true;
         if (keysObj1.length !== keysObj2.length) return false;
 
-        for (let i in obj1) {
-            if (obj1[i] !== obj2[i]) {
-                console.log(i);
-                if (dateTest.call(obj1[i]) === '[object Date]' && dateTest.call(obj2[i]) === '[object Date]') {
-                    if (obj1[i].getTime() !== obj2[i].getTime()) return false;
-                } else if (typeof obj1[i] === 'object'
-                    && typeof obj2[i] === 'object'
-                    && Array.isArray(obj1[i]) !== true
-                    && Array.isArray(obj2[i]) !== true ) {
-                    deepEqual(obj1[i], obj2[i]);
-                } else if (Array.isArray(obj1[i]) === true && Array.isArray(obj2[i]) === true) {
-                    if (obj1[i].length !== obj2[i].length) {
+        for (let i = 0; i < keysObj1.length; i++) {
+            let object1 = obj1[keysObj1[i]],
+                object2 = obj2[keysObj1[i]];
+
+            if (object1 !== object2) {
+
+                if (dateTest.call(object1) === '[object Date]'
+                    && dateTest.call(object2) === '[object Date]') {
+                    if (object1.getTime() !== object2.getTime()) {
+                        return false;
+                    }
+                } else if (typeof object1 === 'object'
+                    && typeof object2 === 'object'
+                    && Array.isArray(object1) !== true
+                    && Array.isArray(object2) !== true) {
+                    var callIt = deepEqual(object1, object2);
+
+                    if (!callIt) return false;
+                } else if (Array.isArray(object1) === true && Array.isArray(object2) === true) {
+
+                    if (object1.length !== object2.length) {
+                        console.log(object1.length, object2.length);
+                        console.log('t');
                         return false;
                     } else {
-                        obj1[i].sort((a,b) => {
-                            if (a === b) {
-                                return 0;
+                        for (let j = 0; j < object1.length; j++) {
+                            if (object1[j] !== object2[j]) {
+
+                                if (typeof object1[j] === 'object' && typeof object2[j] === 'object') {
+                                    let callIt = deepEqual(object1[j], object2[j]);
+
+                                    if (!callIt) return false;
+                                } else {
+                                    return false;
+                                }
+
                             }
-                            if (typeof a === typeof b) {
-                                return a < b ? -1 : 1;
-                            }
-                            return typeof a < typeof b ? -1 : 1;
-                        });
-                        obj2[i].sort((a,b) => {
-                            if (a === b) {
-                                return 0;
-                            }
-                            if (typeof a === typeof b) {
-                                return a < b ? -1 : 1;
-                            }
-                            return typeof a < typeof b ? -1 : 1;
-                        });
-                        console.log(obj1[i],obj2[i]);
-                    }
-                    for (let j = 0; j < obj1[i].length; j++) {
-                        if (obj1[i][j] !== obj2[i][j] && typeof obj1[i][j] !== 'object') {
-                            return false;
-                        } else {
-                            deepEqual(obj1[i][j],obj2[i][j]);
                         }
                     }
+
                 } else {
                     return false;
                 }
             }
+            if (i === keysObj1.length - 1) {
+                return true;
+            }
         }
-        return true;
     }
 
     console.log(deepEqual(objA,objB));
@@ -119,7 +137,8 @@
 //     Если одним из элементов сверяемого массива, является другой массив или объект,
 // то их тоже надо сверить рекурсивно.
 //
-//     При сверке объектов - последовательность свойств не важна, но при сверке массивов, важна последовательность элементов, то есть массивы:
+//     При сверке объектов - последовательность свойств не важна, но при сверке массивов, важна последовательность элементов,
+// то есть массивы:
 // `[1,2,3,4]` и `[2,1,3,4]` не равны, так как, хотя и имеют одинаковые значения, отличаются в последовательности этих значений.
 //
 //     Так же обратите внимание, что даты тоже должны сравниваться корректно,
