@@ -1,0 +1,68 @@
+.accordion {
+    width: 475px;
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+.accordion__logo {
+    width: 215px;
+    height: 39px;
+    margin: 0 auto;
+    background: url(http://s8.hostingkartinok.com/uploads/images/2016/10/edc741dcf6abab05945fa79c1ff36638.png);
+}
+
+.accordion__element {
+    list-style-type: none;
+    position: relative;
+    background: #e7e7e7;
+    margin-bottom: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.accordion__element-item {
+    width: 100%;
+    padding: 10px;
+    padding-left: 20px;
+    font-size: 15px;
+    display: block;
+}
+
+.accordion__element-item--first {
+    background: #696666;
+    border-radius: 25px;
+    width: 93%;
+    color: #fff;
+    display: block !important;
+}
+
+.accordion__element-item--even {
+    color: #696666;
+    background: #e7e7e7;
+}
+
+.accordion__polygon {
+    width: 14px;
+    height: 12px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: url(http://s8.hostingkartinok.com/uploads/images/2016/10/d885053c5f1da56ce6a45c116b2ce7c8.png);
+}
+
+.accordion__opening {
+    background: #ff8663;
+    color: #fff;
+}
+
+.accordion__content {
+    display: none;
+}
+
+.show {
+    display: block !important;
+}
+
+.accordion__polygon--opening {
+    background: url(http://s8.hostingkartinok.com/uploads/images/2016/10/005426a36dd7ee6969f650df96d0a827.png);
+}
