@@ -13,7 +13,6 @@
             g = Math.round(Math.random() * 256),
             b = Math.round(Math.random() * 256);
 
-
         return result = '#' + r.toString(16) + g.toString(16) + b.toString(16);
     };
 
