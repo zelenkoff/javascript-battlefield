@@ -9,11 +9,11 @@
         body = document.querySelector('body');
 
     let randomColor = () => {
-        let r = Math.round(Math.random() * 256),
-            g = Math.round(Math.random() * 256),
-            b = Math.round(Math.random() * 256);
+        let r = Math.round(Math.random() * 255),
+            g = Math.round(Math.random() * 255),
+            b = Math.round(Math.random() * 255);
 
-        return result = '#' + r.toString(16) + g.toString(16) + b.toString(16);
+        return '#' + r.toString(16) + g.toString(16) + b.toString(16);
     };
 
     body.addEventListener('mousedown', e => {
@@ -56,7 +56,7 @@
         div.style.position = 'absolute';
         div.style.left = Math.random() * window.innerWidth * Math.random() + 'px';
         div.style.top = Math.random() * window.innerHeight * Math.random() + 'px';
-        div.style.background = randomColor();
+        div.style.backgroundColor = randomColor();
         div.style.border = '1px solid';
         div.style.cursor = 'pointer';
 
