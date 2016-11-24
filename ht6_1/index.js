@@ -15,4 +15,4 @@ let timer = (time) => {
     });
 };
 
-timer(3000).then(() => console.log('я вывелась через 3 секунды'));
+timer(3000).then(() => console.loggit ('я вывелась через 3 секунды'));
