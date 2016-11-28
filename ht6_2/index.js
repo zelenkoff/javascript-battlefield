@@ -33,14 +33,13 @@
     getCitys('https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json')
         .then(
             res => {
-                let data = JSON.parse(res),
-                    arr = [];
+                let data = JSON.parse(res);
 
-                let tranform = data.map(obj => arr.push(obj.name));
+                let tranform = data.map(obj => obj.name);
 
-                arr.sort();
+                tranform.sort();
 
-                content.textContent = arr;
+                content.textContent = tranform;
 
             },
             rej => console.log(rej)
