@@ -28,15 +28,13 @@ let ready = () => {
 
 ready().then(
     res => {
-        let data = JSON.parse(res),
-            arr = [];
+        let data = JSON.parse(res);
 
-        for (let i of data) {
-            for (let j in i) {
-                arr.push(i[j].toLowerCase());
-            }
-        }
-        viewer(arr);
+        let tranform = data.map(obj => obj.name.toLowerCase());
+
+        console.log(tranform);
+
+        viewer(tranform);
 
 
     },
