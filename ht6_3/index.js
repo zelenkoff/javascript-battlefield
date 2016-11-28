@@ -32,43 +32,32 @@ ready().then(
 
         let tranform = data.map(obj => obj.name.toLowerCase());
 
-        console.log(tranform);
-
         viewer(tranform);
-
-
     },
     rej => console.log(rej)
 );
 
 let viewer = data => {
     input.oninput = () => {
-        for (let i of data) {
-            if (i.indexOf(input.value) !== -1) {
-                creator(i, input.value);
-            }
-        }
+        let checked = data.filter(city => city.indexOf(input.value) !== -1);
+
+        creator(checked);
+
     };
 };
 
-function creator(element, value) {
+let creator = data => {
 
     for (let i = 0; i < list.childNodes.length; i++) {
-        let item = list.childNodes[i].textContent;
-
-        if (item.indexOf(value) === -1) {
-            list.childNodes[i].remove();
-        }
+        list.childNodes[i].remove();
+        i--;
     }
+  data.forEach((city, index, arr) => {
+     let li = document.createElement('li');
+      li.textContent = city;
+      list.appendChild(li);
+  });
+};
 
-        let li = document.createElement('li');
-
-        li.textContent = element;
-
-        list.appendChild(li);
-
-
-
-}
 
 document.addEventListener('DOMContentLoaded', ready);
