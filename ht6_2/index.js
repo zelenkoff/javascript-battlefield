@@ -36,15 +36,11 @@
                 let data = JSON.parse(res),
                     arr = [];
 
-                for (let j of data) {
-                    for (let k in j) {
-                        arr.push(j[k]);
-                    }
-                }
+                let tranform = data.map(obj => arr.push(obj.name));
+
                 arr.sort();
 
                 content.textContent = arr;
-
 
             },
             rej => console.log(rej)
