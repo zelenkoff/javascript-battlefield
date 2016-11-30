@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ht7_1</title>
+    <style>
+        .table {
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+        .form {
+            width: 400px;
+            border: 1px solid #e7e7e7;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        .form input {
+            width: 100%;
+            height: 20px;
+            margin-top: 5px;
+        }
+        .button {
+            width: 100px;
+            height: 30px;
+            border: 0;
+            background: #ff8663;
+            border-radius: 2px;
+            cursor: pointer;
+            color: #fff;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<table class="table" id="table">
+    <tr class="caption">
+        <td>Coockie Name</td>
+        <td>Coockie Value</td>
+        <td>Action</td>
+    </tr>
+</table>
+<form action="" class="form" id="form">
+    <input type="text" id="newName" placeholder="Введите имя">
+    <input type="text" id="newValue" placeholder="Введите значение">
+    <input type="text" id="newDate" placeholder="Срок годности (в днях - например 2)">
+    <button class="button" id="add">Добавить</button>
+</form>
+
+<script src="index.js"></script>
+</body>
+</html>
