@@ -40,8 +40,11 @@ ready().then(
 let viewer = data => {
     input.oninput = () => {
         let checked = data.filter(city => city.indexOf(input.value) !== -1);
-
-        creator(checked);
+        if (!input.value) {
+            creator([]);
+        } else {
+            creator(checked.sort());
+        }
 
     };
 };
