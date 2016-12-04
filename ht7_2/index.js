@@ -17,6 +17,7 @@
     let coockies = document.cookie,
         inputs = document.querySelectorAll('input');
 
+
     add.addEventListener('click', e => {
         e.preventDefault();
         let date = new Date;
@@ -76,7 +77,6 @@
 
     };
 
-    viewer(tranforming);
 
 
 })();
