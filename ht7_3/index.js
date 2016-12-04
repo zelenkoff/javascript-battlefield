@@ -11,11 +11,13 @@
         body = document.querySelector('body');
 
     let randomColor = () => {
-        let r = Math.round(Math.random() * 255),
-            g = Math.round(Math.random() * 255),
-            b = Math.round(Math.random() * 255);
+        let symbols = '0123456789ABCDEF',
+            color = '#';
 
-        return '#' + r.toString(16) + g.toString(16) + b.toString(16);
+        for (let i = 0; i < 6; i++) {
+            color += symbols[Math.floor(Math.random() * 16)];
+        }
+        return color;
     };
 
     body.addEventListener('mousedown', e => {
