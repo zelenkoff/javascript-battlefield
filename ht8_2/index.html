@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .header {
+            width: 610px;
+            text-align: center;
+            margin: 0 auto;
+            border-bottom: 1px solid #e7e7e7;
+        }
+        .results {
+            width: 610px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        .userFoto {
+            border-radius: 50%;
+        }
+        .fio {
+            position: absolute;
+            left: 130px;
+        }
+        .bday {
+            position: absolute;
+            top: 40px;
+            left: 130px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header" id="header">
+    <h1 id="header__name"></h1>
+    <p class="lead">Друзья отсортированы по дате рождения в порядке убывания</p>
+</div>
+<div class="results" id="results">
+
+</div>
+
+<script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<script src="index.js"></script>
+
+<script type="text/x-handlebars-template" id="lisfOfFriends">
+    <ul class="list-group" id="friendList">
+        {{#each list}}
+        <li class="list-group-item">
+            <img class="userFoto" src="{{photo_100}}" alt="">
+            <span class="fio lead">{{first_name}} {{last_name}}</span>
+            <span class="bday">Дата рождения: {{bdate}}</span>
+        </li>
+        {{/each}}
+    </ul>
+</script>
+
+
+</body>
+</html>
