@@ -11,7 +11,7 @@ Handlebars.registerHelper('formatTime', function(time) {
 let globalPlayer = document.createElement('audio');
 let playingItem;
 
-console.dir(globalPlayer)
+console.dir(globalPlayer);
 
 new Promise(function(resolve) {
     if (document.readyState === 'complete') {
@@ -46,13 +46,27 @@ new Promise(function(resolve) {
         });
     })
 }).then(function() {
+
     function onProgress(e) {
-        console.log(e);
+
         let progressBar = playingItem.querySelector('[data-role=progressbar]');
+        let bar = document.querySelectorAll('.progress');
+        let event = this;
+        let source = this.src;
         let duration = e.target.duration;
         let currentTime = e.target.currentTime;
         let progress = parseInt(100 / duration * currentTime);
 
+        document.addEventListener('click', ev => {
+
+            if (ev.target.classList[0] === 'progress'
+                || ev.target.classList[0] === 'progress-bar'
+                && event.src === source ) {
+                let percentOfBar = ev.offsetX * 100/1108;
+                event.currentTime = percentOfBar * event.duration/100;
+            }
+
+        });
         progressBar.style.width = progress + '%';
     }
 
@@ -101,7 +115,7 @@ new Promise(function(resolve) {
     });
 
     document.addEventListener('keydown', function(e) {
-        console.log(e)
+        console.log(e);
         if (e.target.tagName !== 'INPUT') {
             switch (e.keyCode) {
                 case 32: {
@@ -130,7 +144,7 @@ new Promise(function(resolve) {
     globalPlayer.addEventListener('pause', onPause);
     globalPlayer.addEventListener('timeupdate', onProgress);
     globalPlayer.addEventListener('ended', onEnd);
-    document.addEventListener('click', e => console.log(e.target, e.coords));
+
 
     results.addEventListener('click', function(e) {
         if (e.target.getAttribute('data-role') === 'playback') {
