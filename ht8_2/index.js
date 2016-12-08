@@ -38,37 +38,45 @@ new Promise((resolve, reject) => {
            } else {
 
                 let arr = answer.response.items,
+                    today = Date.parse(new Date()),
                     arrNoDate = [];
 
-                let sorted = arr.map(item => {
+                let sorted = arr.map((item, i) => {
                     if (!item.bdate) {
                         arrNoDate.push(item);
                     } else {
                         let date = item.bdate.split('.');
 
-                        if (date.length < 3) {
-                            date.push('2016');
+                        if (date.length > 2) {
+                            date.splice(2,1);
                         }
 
                         item.bdate = Date.parse(date.reverse().join('-'));
+
                         return item;
                     }
                 }).sort((a, b) => a.bdate - b.bdate).map(item => {
                     if (item) {
                         let date = new Date(item.bdate);
 
-                        item.bdate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+                        item.bdate = `${date.getDate()}.${date.getMonth() +1}.${date.getFullYear()}`;
                         return item;
                     }
-
                 });
 
-                // console.log(sorted);
 
-               //
+                for (let i = 0; i < sorted.length; i++) {
+                    if (!sorted[i]) {
+                        console.log('да');
+                        sorted.splice(i);
+                    }
+                }
+                console.log(sorted);
+
+                let fullArray = sorted.concat(arrNoDate, true);
                 let source = lisfOfFriends.innerHTML;
                let compiler = Handlebars.compile(source);
-               let template = compiler({list: sorted});
+               let template = compiler({list: fullArray});
 
                 results.innerHTML = template;
 
