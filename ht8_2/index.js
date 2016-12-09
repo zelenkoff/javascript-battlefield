@@ -38,45 +38,50 @@ new Promise((resolve, reject) => {
            } else {
 
                 let arr = answer.response.items,
-                    today = Date.parse(new Date()),
-                    arrNoDate = [];
+                    today = new Date(),
+                    time = today.getTime(),
+                    before = [],
+                    after = [],
+                    empty = [],
+                    full = [];
 
                 let sorted = arr.map((item, i) => {
                     if (!item.bdate) {
-                        arrNoDate.push(item);
+                        empty.push(item);
                     } else {
                         let date = item.bdate.split('.');
 
-                        if (date.length > 2) {
-                            date.splice(2,1);
+                        if (date.length < 3) {
+                            date.push(today.getFullYear());
                         }
-
                         item.bdate = Date.parse(date.reverse().join('-'));
 
                         return item;
                     }
-                }).sort((a, b) => a.bdate - b.bdate).map(item => {
-                    if (item) {
-                        let date = new Date(item.bdate);
-
-                        item.bdate = `${date.getDate()}.${date.getMonth() +1}.${date.getFullYear()}`;
-                        return item;
-                    }
+                }).filter(item => item).forEach(item => {
+                    item.bdate > time ? after.push(item) : before.push(item);
                 });
 
+                after = after.sort((a, b) => a.bdate - b.bdate);
+                before = before.sort((a, b) => a.bdate - b.bdate);
 
-                for (let i = 0; i < sorted.length; i++) {
-                    if (!sorted[i]) {
-                        console.log('да');
-                        sorted.splice(i);
-                    }
-                }
-                console.log(sorted);
+                full = after.concat(before);
 
-                let fullArray = sorted.concat(arrNoDate, true);
+                console.log(full);
+
+                let fullRecovered = full.map(item => {
+                    let date = new Date(item.bdate);
+
+                    item.bdate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+
+                    return item;
+                });
+
+                let fullInformation = fullRecovered.concat(empty);
+
                 let source = lisfOfFriends.innerHTML;
                let compiler = Handlebars.compile(source);
-               let template = compiler({list: fullArray});
+               let template = compiler({list: fullInformation});
 
                 results.innerHTML = template;
 
