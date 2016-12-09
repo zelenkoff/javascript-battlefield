@@ -53,6 +53,9 @@ new Promise((resolve, reject) => {
 
                         if (date.length < 3) {
                             date.push(today.getFullYear());
+                        } else {
+                            date.splice(2,1);
+                            date.push(today.getFullYear());
                         }
                         item.bdate = Date.parse(date.reverse().join('-'));
 
@@ -65,9 +68,9 @@ new Promise((resolve, reject) => {
                 after = after.sort((a, b) => a.bdate - b.bdate);
                 before = before.sort((a, b) => a.bdate - b.bdate);
 
+
                 full = after.concat(before);
 
-                console.log(full);
 
                 let fullRecovered = full.map(item => {
                     let date = new Date(item.bdate);
