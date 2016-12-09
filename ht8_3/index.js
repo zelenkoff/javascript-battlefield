@@ -52,20 +52,15 @@ new Promise(function(resolve) {
         let progressBar = playingItem.querySelector('[data-role=progressbar]');
         let bar = document.querySelectorAll('.progress');
         let event = this;
-        let source = this.src;
         let duration = e.target.duration;
         let currentTime = e.target.currentTime;
         let progress = parseInt(100 / duration * currentTime);
 
         document.addEventListener('click', ev => {
-
-            if (ev.target.classList[0] === 'progress'
-                || ev.target.classList[0] === 'progress-bar'
-                && event.src === source ) {
-                let percentOfBar = ev.offsetX * 100/1108;
-                event.currentTime = percentOfBar * event.duration/100;
-            }
-
+                if (ev.target.classList[0] === 'progress' || ev.target.classList[0] === 'progress-bar') {
+                    let percentOfBar = ev.offsetX * 100/1108;
+                    event.currentTime = percentOfBar * event.duration/100;
+                }
         });
         progressBar.style.width = progress + '%';
     }
