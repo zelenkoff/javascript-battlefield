@@ -48,21 +48,21 @@ new Promise(function(resolve) {
 }).then(function() {
 
     function onProgress(e) {
-
-        let progressBar = playingItem.querySelector('[data-role=progressbar]');
-        let bar = document.querySelectorAll('.progress');
+        let bar = playingItem.childNodes[3].childNodes[1].childNodes[1];
+        let progBar = bar.childNodes[1];
+        let width = bar.clientWidth;
         let event = this;
         let duration = e.target.duration;
         let currentTime = e.target.currentTime;
         let progress = parseInt(100 / duration * currentTime);
 
         document.addEventListener('click', ev => {
-                if (ev.target.classList[0] === 'progress' || ev.target.classList[0] === 'progress-bar') {
-                    let percentOfBar = ev.offsetX * 100/1108;
+                if (ev.target === bar || ev.target === progBar) {
+                    let percentOfBar = ev.offsetX * 100/width;
                     event.currentTime = percentOfBar * event.duration/100;
                 }
         });
-        progressBar.style.width = progress + '%';
+        progBar.style.width = progress + '%';
     }
 
     function onPlay() {
