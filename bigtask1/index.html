@@ -14,8 +14,8 @@
 				<div class="header__img"></div>
 			</div>
 			<div class="finder">
-				<input type="" placeholder="Начните вводить имя друга" class="finder__input-all">
-				<input type="" placeholder="Название" class="finder__input-star"></input>
+				<input type="" placeholder="Начните вводить имя друга" class="finder__input-all" id="inputAll">
+				<input type="" placeholder="Название" class="finder__input-star" id="inputTake"></input>
 			</div>
 			<div class="friends">
 				<div class="friends__all">
@@ -24,28 +24,54 @@
 				</div>
 				<div class="friends__stars">
 					<span class="friends__title">Друзья в списке</span>
-					<div class="friends__stars-item"></div>
+					<div class="friends__stars-item">
+						<ul class="friends__stars-list" id="fav"></ul>
+					</div>
 				</div>
 			</div>
 			<div class="footer">
-				<button class="saver">Сохранить</button>
+				<button class="saver" id="saver">Сохранить</button>
 			</div>
 		</div>
 	</div>
 	<script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 	<script src="index.js"></script>
+	<script src="draganddrop.js"></script>
 
 	<script type="text/x-handlebars-template" id="listOfAllFriends">
 		<ul class="friends__list">
 			{{#each listFriends}}
-			<li class="friends__element">
+			<li class="friends__element" draggable="true">
 				<img src="{{photo_50}}" class="friends__element-foto">
 				<span class="friends__element-title">{{first_name}} {{last_name}}</span>
-				<!-- <div class="friends__adder"></div> -->
+				<div class="friends__adder"></div>
+				<div class="friends__returner"></div>
 			</li>
 			{{/each}}
 		</ul>
+	</script>
+	<script type="text/x-handlebars-template" id="reclamingFriends">
+		<ul class="friends__list">
+			{{#each friends}}
+			<li class="friends__element" draggable="true">
+				<img src="{{photo}}" class="friends__element-foto">
+				<span class="friends__element-title">{{name}}</span>
+				<div class="friends__adder"></div>
+				<div class="friends__returner"></div>
+			</li>
+			{{/each}}
+		</ul>
+	</script>
+	<script type="text/x-handlebars-template" id="reclamingFavorites">
+			{{#each favorites}}
+			<li class="friends__element" draggable="true">
+				<img src="{{photo}}" class="friends__element-foto">
+				<span class="friends__element-title">{{name}}</span>
+				<div class="friends__adder" style="display:none"></div>
+				<div class="friends__returner" style="display:block"></div>
+			</li>
+			{{/each}}
 	</script>
 </body>
 </html>
