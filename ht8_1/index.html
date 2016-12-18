@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+<div class="container"><input type="text" class="container__input" id="input"></div>
+
+<div id="result"></div>
+
+<script id="handle" type="text/x-handlebars-template">
+<ul class="city-list">
+    {{#each list}}
+    <li class="city-list__element">
+        <span class="city-list__title">{{city}}</span>
+    </li>
+    {{/each}}
+</ul>
+</script>
+
+
+</body>
+</html>
