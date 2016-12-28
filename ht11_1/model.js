@@ -38,6 +38,9 @@ var Model = {
         return this.callApi('newsfeed.get', { filters: 'post', count: 20 });
     },
     getGroups: function () {
-        return this.callApi('groups.get', { fields: 'photo_100', extended: 1, v: '5.60'});
+        return this.callApi('groups.get', { fields: 'photo_100', extended: 1, v: '5.60' });
+    },
+    getPhotos: function () {
+        return this.callApi('photos.get', { v: '5.60', album_id: 'profile', extended: 1, count: '100'});
     }
 };
