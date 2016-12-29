@@ -42,5 +42,27 @@ var Model = {
     },
     getPhotos: function () {
         return this.callApi('photos.get', { v: '5.60', album_id: 'profile', extended: 1, count: '100'});
+    },
+    getComments: function (id) {
+        return this.callApi('photos.getComments', { photo_id: id, v: '5.60', extended: 1});
+    },
+    getFullInfo: function () {
+        var photos, comments = [];
+
+        this.getPhotos().then(function (data) {
+            photos = data.items;
+
+            for (var i = 0; i < 10; i++) {
+                Model.getComments(photos[i].id).then(function (data) {
+                    comments.push(data);
+                });
+            }
+
+            return comments;
+        }).then(function (reports) {
+            console.log(reports);
+
+        })
     }
+
 };
