@@ -21,11 +21,16 @@
     add.addEventListener('click', e => {
         e.preventDefault();
         let date = new Date;
+        console.log(date);
         if (!newName.value || !newValue.value || !newDate.value) {
             alert('Заполните все поля!');
 
         } else {
-            document.cookie = `${newName.value}=${newValue.value};path=/;expires=${date.getDate() + +newDate.value}`;
+
+            date.setDate(date.getDate() + +newDate.value);
+
+            document.cookie = `${newName.value}=${newValue.value};path=/;expires=${date.toUTCString()}`;
+
             viewer([`${newName.value}=${newValue.value}`]);
 
             inputs.forEach(el => el.value = '');
@@ -76,7 +81,7 @@
         });
 
     };
-
+    viewer(tranforming);
 
 
 })();
