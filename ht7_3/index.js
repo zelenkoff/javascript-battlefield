@@ -20,19 +20,27 @@
         return color;
     };
 
+    let getCookie = name => {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    };
+
     body.addEventListener('mousedown', e => {
 
         let element = e.target;
+
+        function moveAt(e) {
+            element.style.left = e.pageX - element.offsetWidth / 2 + 'px';
+            element.style.top = e.pageY - element.offsetWidth / 2 + 'px';
+        }
 
         if (element.classList.value !== 'creator' && element.classList.value !== 'saver') {
             element.style.position = 'absolute';
             moveAt(e);
             element.style.zIndex = 1000;
-
-            function moveAt(e) {
-                element.style.left = e.pageX - element.offsetWidth / 2 + 'px';
-                element.style.top = e.pageY - element.offsetWidth / 2 + 'px';
-            }
 
             document.onmousemove = function (e) {
                 moveAt(e);
@@ -83,13 +91,16 @@
         }
 
         let cake = JSON.stringify(data);
-        document.cookie = `divs=${cake};path=/;expires=${time.getDate() + 1}` ;
+        time.setDate(time.getDate() + 1);
+        document.cookie = `divs=${cake};path=/;expires=${time.toUTCString()}` ;
 
     });
 
     if (document.cookie.match('divs')) {
-        let recovering = document.cookie.match('divs').input.slice(5),
-            changing = JSON.parse(recovering);
+
+        let recovering = getCookie('divs');
+        let changing = JSON.parse(recovering);
+
 
         let out = changing.map(obj => {
             let element = document.createElement(`${obj.element}`),
