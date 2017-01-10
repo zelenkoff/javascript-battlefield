@@ -11,6 +11,7 @@ var Controller = {
     },
     newsRoute: function() {
         return Model.getNews().then(function (news) {
+            console.log(news);
             results.innerHTML = View.render('news', {list: news.items});
         });
     },
@@ -20,10 +21,8 @@ var Controller = {
         })
     },
     photosRoute: function () {
-        console.log(Model.getFullInfo());
-        // return Model.getPhotos().then(function (photos) {
-        //     console.log(photos.items);
-        //     results.innerHTML = View.render('photos', {list: photos.items});
-        // })
+        return Model.getData().then(function (data) {
+            results.innerHTML = View.render('photos', {list: data});
+        })
     }
 };
