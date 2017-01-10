@@ -25,6 +25,9 @@ export default class Calculator {
         let args = [...arguments];
 
         let result = args.reduce((imp, curr) => {
+            if (!curr) {
+                throw new Error('Делить на нуль можно, но не нужно!');
+            }
             return imp / curr;
         }, this.firstNumber);
 

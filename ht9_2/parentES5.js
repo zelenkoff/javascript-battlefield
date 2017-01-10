@@ -25,6 +25,9 @@ Calculator.prototype.div = function() {
     var args = Array.prototype.slice.call(arguments);
 
     var result = args.reduce(function(imp, curr) {
+        if (!curr) {
+            throw new Error('Делить на нуль можно, но не нужно!');
+        }
         return imp / curr;
     }, this.firstNumber);
 
