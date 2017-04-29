@@ -1,3 +1,1 @@
-There are my homework repository. 
-
-First time use php storm...
+Diffrent kind of javascript tasks for improve my skills.
