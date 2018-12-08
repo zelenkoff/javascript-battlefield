@@ -1,1 +1,1 @@
-Diffrent kind of javascript tasks for improve my skills.
+Diffrent kind of javascript tasks to improve my skills.
